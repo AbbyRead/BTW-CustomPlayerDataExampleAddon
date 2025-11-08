@@ -17,8 +17,7 @@ import btw.community.customplayerdata.util.PlayerDataExtension;
 public class EntityPlayerMixin {
 
     @Unique private static final String NBT_TAG = "CustomPlayerData";
-    @Unique private int customValue = 0;
-    @Unique private int timesJoinedWorld = 0;
+    @Unique private int customValue = 1;
     @Unique private boolean hasDisplayedJoinMessage = false;
 
     // Interface getter/setter
@@ -30,7 +29,6 @@ public class EntityPlayerMixin {
     private void onWriteModDataToNBT(NBTTagCompound tag, CallbackInfo ci) {
         NBTTagCompound myData = new NBTTagCompound();
         myData.setInteger("customValue", customValue);
-        myData.setInteger("timesJoinedWorld", timesJoinedWorld);
         tag.setTag(NBT_TAG, myData);
     }
 
@@ -40,10 +38,9 @@ public class EntityPlayerMixin {
         if (tag.hasKey(NBT_TAG)) {
             NBTTagCompound myData = tag.getCompoundTag(NBT_TAG);
             customValue = myData.hasKey("customValue") ? myData.getInteger("customValue") : 0;
-            timesJoinedWorld = myData.hasKey("timesJoinedWorld") ? myData.getInteger("timesJoinedWorld") : 0;
         }
         // Increment join counter
-        timesJoinedWorld++;
+        customValue++;
     }
 
     // Show message on world join (once)
@@ -53,7 +50,8 @@ public class EntityPlayerMixin {
         World world = self.worldObj;
 
         if (!world.isRemote && !hasDisplayedJoinMessage && self.addedToChunk) {
-            self.addChatMessage("You've joined this world " + timesJoinedWorld + " times!");
+            self.addChatMessage("You've joined this world " +
+                    customValue + (customValue > 1 ? " times!" : " time!"));
             hasDisplayedJoinMessage = true;
         }
     }
