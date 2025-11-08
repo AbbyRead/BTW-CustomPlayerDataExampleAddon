@@ -1,79 +1,68 @@
-# Fabric Example Mod
+# Custom Player Data Example Addon
 
-- [Quick start guide](#quick-start-guide)
-  - [Introduction to the folder structure](#introduction-to-the-folder-structure)
-  - [Creating your mod](#creating-your-mod)
-  - [Useful gradle commands](#useful-gradle-commands)
-- [More info](#more-info)
-- [License](#license)
+An example **Better Than Wolves CE** addon demonstrating how to attach and persist custom per-player data (stored in NBT), using a simple in-game counter that increases each time the player loads into a world.
 
-## Quick start guide
+---
 
-* Clone this repository
-* Download the according BTW-CE 3.0+ *intermediary* release
-* Drag&Drop the intermediary .zip file onto the *install.bat*
-* Wait till it fully finishes
-* Run the gradle task *build* and then *runClient*
+## What this example shows
 
-### Introduction to the folder structure
+This addon demonstrates how to:
 
-**Build files:**
+* Add a new integer field (`customValue`) to every player.
+* Save and load that data automatically using NBT.
+* Preserve it across deaths, respawns, and world reloads.
+* Display the value in chat to confirm it’s working.
 
-| File                | Description                                              |
-| ------------------- | -------------------------------------------------------- |
-| `build.gradle`      | Configures the compilation process.                      |
-| `gradle.properties` | Contains properties for Minecraft, fabric, and your mod. |
-| `settings.gradle`   | Configures the plugin repositories.                      |
+When you join a world, you’ll see a message like:
 
-**Fabric files:**
-
-These files are located at `src/main/resources`.
-
-| File                    | Description                              | Additional information                                                                                                |
-| ----------------------- | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `fabric.mod.json`       | Contains metadata about your mod.        | [wiki:fabric_mod_json_spec](https://fabricmc.net/wiki/documentation:fabric_mod_json_spec)                             |
-| `modid.mixins.json`     | Contains a list of all your mixin files. | [wiki:mixin_registration](https://fabricmc.net/wiki/tutorial:mixin_registration)                                      |
-| `assets/modid/icon.png` | The icon of your mod.                    | [wiki:fabric_mod_json_spec#icon](https://fabricmc.net/wiki/documentation:fabric_mod_json_spec?s[]=icon#custom_fields) |
-
-
-### Creating your mod
-
-First of you must replace all occurrences of `modid` with the id of your mod.
-
-If your mod doesn't use mixins you can safely remove the mixin entry in your `fabric.mod.json` as well as delete any `*.mixin.json` files.
-
-This template has the legacy fabric api included in it's build script, more info about the api can be found at it's [github repo](https://github.com/Legacy-Fabric/fabric).
-If you know what you are doing you can also safely remove the api from the build script as it isn't required.
-
-### Useful gradle commands
-
-```sh
-# Compile your mod
-./gradlew build
-
-# Remove old build files
-./gradlew clean
-
-# Generate Minecraft sources
-./gradlew genSources
-
-# Launch a modded Minecraft client
-./gradlew runClient
-
-# Kill gradle if it's doing stupid things
-./gradlew --stop
 ```
+
+[CustomPlayerData] You have joined this world 3 times.
+
+```
+
+This confirms that:
+
+* The data is saved to the player’s NBT.
+* It persists across sessions.
+* It’s properly transferred when the player respawns.
+
+You can use this same pattern to store any type of per-player data — integers, booleans, or strings — that you want to survive between play sessions.
+
+---
+
+## Project structure
+
+```
+
+src/main/
+├── java/btw/community/customplayerdata/
+│   ├── CustomPlayerDataAddon.java
+│   ├── mixin/data/
+│   │   ├── EntityPlayerMixin.java
+│   │   └── ServerConfigurationManagerMixin.java
+│   └── util/
+│       └── PlayerDataExtension.java
+└── resources/
+├── assets/customplayerdata/icon.png
+├── fabric.mod.json
+└── mixins.customplayerdata.json
+
+```
+
+The key mixins modify `EntityPlayer` and `ServerConfigurationManager` to attach, save, and restore your custom data.
+
+---
 
 ## More info
 
-Additional tutorials and tips can be found in the [wiki](https://github.com/Legacy-Fabric/fabric-example-mod/wiki).
+For general setup and build instructions, see the [BTW Gradle Fabric Example](https://github.com/BTW-Community/BTW-gradle-fabric-example).
 
-For more detailed setup instructions please see the [fabric wiki](https://fabricmc.net/wiki/tutorial:setup).
+For additional Fabric and mixin documentation, see the [Legacy Fabric wiki](https://fabricmc.net/wiki/).
 
-If you are new to fabric or Minecraft modding in general then [this wiki page](https://fabricmc.net/wiki/tutorial:primer) may help you.
+---
 
 ## License
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
-This project incorporates:
-* A precompiled version of [Tiny Remapper](https://github.com/FabricMC/tiny-remapper) (LGPL-3.0)
+This example project is released under the **0BSD** license.  
+You’re free to use, copy, and modify it for your own addons — attribution is appreciated but not required.
