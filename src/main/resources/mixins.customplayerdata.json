@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "btw.community.customplayerdata.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "data.EntityPlayerMixin",
+    "data.ServerConfigurationManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
