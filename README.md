@@ -115,11 +115,14 @@ This addon includes an example of implementing localized and properly pluralized
 
 * **Pluralization logic** handles complex rules:
    - **English, German, French, Portuguese, Spanish**: "time" (1) vs "times" (2+)
-   - **Russian**: Uses three forms based on complex rules:
-      - "раз" for 1, 21, 31, etc. (but not 11)
-      - "раза" for 2-4, 22-24, etc. (but not 12-14)
-      - "раз" for 5+, 11-14, and other cases
-   - **Hindi, Japanese, Chinese**: No pluralization (same word for all counts)
+   - **Russian**: Uses three forms based on the number:
+      - **"раз"** → numbers ending in 1, except those ending in 11  
+        *Examples:* 1 раз, 21 раз, 31 раз
+      - **"раза"** → numbers ending in 2–4, except those ending in 12–14  
+        *Examples:* 2 раза, 3 раза, 4 раза, 22 раза, 23 раза
+      - **"раз"** → numbers ending in 5–9, 0, or 11–14  
+        *Examples:* 5 раз, 6 раз, 10 раз, 11 раз, 12 раз, 14 раз, 25 раз
+  - **Hindi, Japanese, Chinese**: No pluralization (same word for all counts)
 
 * Adding a new language requires creating a `.lang` file with the same key and ensuring proper UTF-8 encoding.
 
