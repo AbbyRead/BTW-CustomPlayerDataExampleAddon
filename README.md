@@ -109,6 +109,10 @@ This addon includes an example of implementing localized and properly pluralized
 
 * In Minecraft 1.6.4, regional fallback is not supported. Selecting "Español (México)" will not fall back to using the es_es.lang file — the game only loads the exact language file matching the selected language code (or defaults to `en_us`).
 
+* The "addon prefix" setting in fabric.mod.json (e.g., "EX", or in this addon's case: "CPDA") does **not** affect loading of `.lang` files.
+  Minecraft reads language files directly from `assets/<modid>/lang/<locale>.lang` based on the exact filename
+  (case-sensitive). Correctly naming your files (e.g., `en_US.lang`) is what ensures they load properly.
+
 * **Pluralization logic** handles complex rules:
    - **English, German, French, Portuguese, Spanish**: "time" (1) vs "times" (2+)
    - **Russian**: Uses three forms based on complex rules:

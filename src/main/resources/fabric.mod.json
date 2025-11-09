@@ -21,7 +21,7 @@
     ]
   },
   "custom": {
-    "btw:addon_prefix": "EX"
+    "btw:addon_prefix": "CPDA"
   },
   "mixins": [
     "customplayerdata.mixins.json"

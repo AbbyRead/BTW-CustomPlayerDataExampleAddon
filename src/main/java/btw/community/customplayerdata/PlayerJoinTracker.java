@@ -1,6 +1,7 @@
 package btw.community.customplayerdata;
 
 import net.minecraft.src.EntityPlayerMP;
+import btw.AddonHandler;
 
 /**
  * Handles player join tracking and sending a localized welcome message.
@@ -31,6 +32,11 @@ public class PlayerJoinTracker {
 
 		// Fetch localized message. Regional fallback does not occur in MC 1.6.4.
 		String messageTemplate = LocalizationHelper.getLocalizedString("message.customplayerdata.welcome");
+
+		// Log a warning if the translation key is missing
+		if (messageTemplate.equals("message.customplayerdata.welcome")) {
+			AddonHandler.logWarning("Translation key 'message.customplayerdata.welcome' is missing in your .lang files!");
+		}
 
 		// Send message
 		player.addChatMessage(String.format(messageTemplate, joinCount, timesWord));
