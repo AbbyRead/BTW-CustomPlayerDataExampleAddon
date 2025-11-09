@@ -12,9 +12,9 @@ This addon demonstrates how to:
 * Persist the data automatically using BTW's **`PlayerDataEntry`** system.
 * Preserve the data across deaths, respawns, and world reloads.
 * Sync the data between server and client (so players can see it immediately).
-* Display the value in chat to confirm it’s working.
+* Display the value in chat to confirm it's working.
 
-When you join a world, you’ll see a message like:
+When you join a world, you'll see a message like:
 
 ```
 Welcome back! You have joined 3 times.
@@ -22,7 +22,7 @@ Welcome back! You have joined 3 times.
 
 This confirms that:
 
-* The data is saved in the player’s persistent `.dat` file.
+* The data is saved in the player's persistent `.dat` file.
 * It survives across sessions and server restarts.
 * It can be safely read and updated using `getData()` and `setData()`.
 
@@ -73,7 +73,7 @@ You can use this pattern to store any type of per-player data — integers, bool
 
 5. **Data storage location**
 
-   BTW stores player-specific data in the player’s `.dat` file:
+   BTW stores player-specific data in the player's `.dat` file:
 
    ```
    players/<playername>.dat -> JoinCount
@@ -89,7 +89,7 @@ You can use this pattern to store any type of per-player data — integers, bool
 
 ## Bonus Example Component: Localization & Pluralization
 
-This addon includes an example of implementing localized and pluralized messages for the welcome text.
+This addon includes an example of implementing localized and properly pluralized messages for the welcome text.
 
 * The message template uses placeholders:
 
@@ -100,15 +100,24 @@ This addon includes an example of implementing localized and pluralized messages
 * `LocalizationHelper` selects the correct word form based on count and fetches the translation:
 
   ```java
-  String word = LocalizationHelper.getTimesWord(joinCount);
-  String message = String.format(
-      LocalizationHelper.getLocalizedString("message.customplayerdata.welcome"),
-      joinCount, word
-  );
-  player.addChatMessage(message);
+  String timesWord = LocalizationHelper.getTimesWord(joinCount);
+  String messageTemplate = LocalizationHelper.getLocalizedString("message.customplayerdata.welcome");
+  player.addChatMessage(String.format(messageTemplate, joinCount, timesWord));
   ```
 
-* All `.lang` files are UTF-8 encoded. Adding a new language requires creating a `.lang` file with the same key.
+* All `.lang` files **must be saved as UTF-8 encoding** to properly display non-ASCII characters (Russian, Chinese, Japanese, Hindi, etc.). Most text editors default to UTF-8, but verify this for files containing non-Latin characters.
+
+* In Minecraft 1.6.4, regional fallback is not supported. Selecting "Español (México)" will not fall back to using the es_es.lang file — the game only loads the exact language file matching the selected language code (or defaults to `en_us`).
+
+* **Pluralization logic** handles complex rules:
+   - **English, German, French, Portuguese, Spanish**: "time" (1) vs "times" (2+)
+   - **Russian**: Uses three forms based on complex rules:
+      - "раз" for 1, 21, 31, etc. (but not 11)
+      - "раза" for 2-4, 22-24, etc. (but not 12-14)
+      - "раз" for 5+, 11-14, and other cases
+   - **Hindi, Japanese, Chinese**: No pluralization (same word for all counts)
+
+* Adding a new language requires creating a `.lang` file with the same key and ensuring proper UTF-8 encoding.
 
 ---
 
@@ -143,11 +152,11 @@ src/main/
 2. **Player joins the world**
 
    * `serverPlayerConnectionInitialized` is called.
-   * `PlayerJoinTracker.sendWelcomeMessage(player)` reads the stored join count, increments it, writes it back, and sends a **localized and pluralized** message (if language files exist).
+   * `PlayerJoinTracker.sendWelcomeMessage(player)` reads the stored join count, increments it, writes it back, and sends a **localized and pluralized** message.
 
 3. **Persistence**
 
-   * BTW automatically saves all registered `PlayerDataEntry` values to the player’s `.dat` file.
+   * BTW automatically saves all registered `PlayerDataEntry` values to the player's `.dat` file.
 
 4. **Syncing**
 
