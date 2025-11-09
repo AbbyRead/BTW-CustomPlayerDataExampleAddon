@@ -107,7 +107,7 @@ This addon includes an example of implementing localized and properly pluralized
 
 * All `.lang` files **must be saved as UTF-8 encoding** to properly display non-ASCII characters (Russian, Chinese, Japanese, Hindi, etc.). Most text editors default to UTF-8, but verify this for files containing non-Latin characters.
 
-* In Minecraft 1.6.4, regional fallback is not supported. Selecting "Español (México)" will not fall back to using the es_es.lang file — the game only loads the exact language file matching the selected language code (or defaults to `en_us`).
+* In Minecraft 1.6.4, regional fallback is not supported. Selecting "Español (México)" will not fall back to using the es_ES.lang file — the game only loads the exact language file matching the selected language code (or defaults to `en_US`).
 
 * The "addon prefix" setting in fabric.mod.json (e.g., "EX", or in this addon's case: "CPDA") does **not** affect loading of `.lang` files.
   Minecraft reads language files directly from `assets/<modid>/lang/<locale>.lang` based on the exact filename
@@ -138,9 +138,9 @@ src/main/
     ├── assets/customplayerdata/
     │   ├── icon.png
     │   └── lang/                  // localization strings
-    │       ├── de_de.lang
+    │       ├── de_DE.lang
     │       ├── ...
-    │       └── zh_cn.lang
+    │       └── zh_CN.lang
     ├── customplayerdata.mixins.json
     └── fabric.mod.json
 ```
