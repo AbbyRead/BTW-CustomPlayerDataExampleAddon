@@ -24,7 +24,7 @@
     "btw:addon_prefix": "EX"
   },
   "mixins": [
-    "mixins.customplayerdata.json"
+    "customplayerdata.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.14.19",
