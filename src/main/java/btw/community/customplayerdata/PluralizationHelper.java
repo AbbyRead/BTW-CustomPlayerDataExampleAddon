@@ -12,7 +12,7 @@ import btw.AddonHandler;
  * NOTE: In Minecraft 1.6.4, regional fallback is not supported.
  * Only exact filename matches (e.g., "es_ES.lang") are loaded.
  */
-public class LocalizationHelper {
+public class PluralizationHelper {
 
 	private static boolean langFilesLoaded = false;
 

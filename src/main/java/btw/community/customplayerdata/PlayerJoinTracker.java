@@ -28,10 +28,10 @@ public class PlayerJoinTracker {
 		player.setData(CustomPlayerDataAddon.JOIN_COUNT_ENTRY, joinCount);
 
 		// Get localized pluralized word
-		String timesWord = LocalizationHelper.getTimesWord(joinCount);
+		String timesWord = PluralizationHelper.getTimesWord(joinCount);
 
 		// Fetch localized message. Regional fallback does not occur in MC 1.6.4.
-		String messageTemplate = LocalizationHelper.getLocalizedString("message.customplayerdata.welcome");
+		String messageTemplate = PluralizationHelper.getLocalizedString("message.customplayerdata.welcome");
 
 		// Log a warning if the translation key is missing
 		if (messageTemplate.equals("message.customplayerdata.welcome")) {
