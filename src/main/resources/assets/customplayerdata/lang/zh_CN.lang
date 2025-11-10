@@ -1,4 +1,3 @@
-# Chinese (Simplified) - No plural forms, counter word "次" is invariant
+# Chinese (Simplified) - No singular/plural word forms needed.  Counter word "次" is invariant.
 # Note: This file must be saved as UTF-8 encoding
-message.customplayerdata.welcome.singular=欢迎回来！你已经加入了 %d 次。
 message.customplayerdata.welcome.plural=欢迎回来！你已经加入了 %d 次。

@@ -1,4 +1,3 @@
-# Japanese - No plural forms, counter word "回" is invariant
+# Japanese - No singular/plural word forms needed.  Counter word "回" is invariant.
 # Note: This file must be saved as UTF-8 encoding
-message.customplayerdata.welcome.singular=おかえりなさい！%d 回参加しました。
 message.customplayerdata.welcome.plural=おかえりなさい！%d 回参加しました。

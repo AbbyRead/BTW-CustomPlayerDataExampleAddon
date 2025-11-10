@@ -1,0 +1,17 @@
+# Scottish Gaelic - 5-form pluralization
+# Note: This file must be saved as UTF-8 encoding
+
+# Singular: exactly 1
+message.customplayerdata.welcome.singular=Fàilte air ais! Tha thu air a dhol a-steach %d turas.
+
+# Dual: exactly 2
+message.customplayerdata.welcome.dual=Fàilte air ais! Tha thu air a dhol a-steach %d thuras.
+
+# Few: 3-6
+message.customplayerdata.welcome.few=Fàilte air ais! Tha thu air a dhol a-steach %d tursan.
+
+# Many: 7-10
+message.customplayerdata.welcome.many=Fàilte air ais! Tha thu air a dhol a-steach %d tursan.
+
+# Plural: 0, 11+
+message.customplayerdata.welcome.plural=Fàilte air ais! Tha thu air a dhol a-steach %d turas.

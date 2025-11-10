@@ -1,4 +1,3 @@
-# Hindi - "बार" is used for counting, no plural form needed
+# Hindi - No singular/plural word forms needed.  Counter word: "बार" is invariant.
 # Note: This file must be saved as UTF-8 encoding
-message.customplayerdata.welcome.singular=स्वागत है! आपने %d बार खेली है।
 message.customplayerdata.welcome.plural=स्वागत है! आपने %d बार खेली है।
