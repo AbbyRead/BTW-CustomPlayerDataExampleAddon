@@ -100,6 +100,7 @@ public class PluralizationHelper {
 		if (rem100 >= 3 && rem100 <= 10) {
 			return "few";
 		}
+		//noinspection ConstantValue
 		if (rem100 >= 11 && rem100 <= 99) {
 			return "many";
 		}
