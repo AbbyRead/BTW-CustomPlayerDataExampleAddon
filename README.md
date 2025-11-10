@@ -17,9 +17,7 @@ This addon demonstrates how to:
 When you join a world, you'll see a message like:
 
 ```
-
 Welcome back! You have joined 3 times.
-
 ```
 
 This confirms that:
