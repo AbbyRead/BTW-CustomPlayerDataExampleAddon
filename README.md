@@ -81,11 +81,10 @@ You can use this pattern to store any type of per-player data — integers, bool
 
    There is **no nested compound**; BTW handles storage and persistence automatically.
 
-6. **Avoid unnecessary mixins**
-
-    * With `serverPlayerConnectionInitialized` and `PlayerDataEntry`, mixins are **not needed** — except for clean data access such as player language (see below).
-	* The saving data does **not require mixins** for standard PlayerDataEntry behavior.
-	* The only mixin I used here is the `EntityPlayerMPAccessor`, which exposes the player's language code for localization.
+6. **Avoid unnecessary mixins (unless you're crazy like me)**
+    * For most per-player data with `serverPlayerConnectionInitialized` and `PlayerDataEntry`, mixins are generally unnecessary.
+    * This example uses a single mixin to access the player’s language so the server can select the correct pluralization key.
+    * The actual translation and formatting of the message is performed entirely by the client, which uses the .lang file corresponding to the player’s currently selected language in-game.
 
 ---
 
