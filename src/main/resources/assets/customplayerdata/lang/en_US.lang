@@ -1,3 +1,4 @@
 # English (US) - Simple singular/plural
 message.customplayerdata.welcome.singular=Welcome back! You have joined %d time.
+message.customplayerdata.welcome.few=Welcome back! You have joined %d times.
 message.customplayerdata.welcome.plural=Welcome back! You have joined %d times.
