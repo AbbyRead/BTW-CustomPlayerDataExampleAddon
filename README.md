@@ -20,6 +20,8 @@ When you join a world, you'll see a message like:
 
 Welcome back! You have joined 3 times.
 
+```
+
 This confirms that:
 
 * The data is saved in the player's persistent `.dat` file.
