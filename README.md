@@ -1,6 +1,6 @@
 # Custom Player Data Example Addon
 
-An example **Better Than Wolves CE** addon demonstrating how to attach and persist custom per-player data using the **official `PlayerDataEntry` API**, with a simple join count that increments each time the player joins a world.
+An example Better Than Wolves CE addon demonstrating how to attach and maintain custom per-player data. It uses the existing PlayerDataEntry API to create an NBT (Named Binary Tag) that is automatically saved to the player’s in-game data and save file. To illustrate, the addon tracks a simple join count that increments each time the player joins a world.
 
 ---
 
