@@ -87,7 +87,7 @@ You can use this pattern to store any type of per-player data — integers, bool
 
 ---
 
-## 🗣️ Localization and Pluralization System
+## 🗣️ Bonus Example Content: Localization
 
 This addon includes a fully localized and pluralization-aware welcome message system, powered by Minecraft’s built-in translation components (`ChatMessageComponent`).
 
