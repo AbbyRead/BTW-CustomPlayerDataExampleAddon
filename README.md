@@ -83,56 +83,75 @@ You can use this pattern to store any type of per-player data — integers, bool
 
 6. **Avoid unnecessary mixins**
 
-   * With `serverPlayerConnectionInitialized` and `PlayerDataEntry`, mixins are **not needed**.
+    * With `serverPlayerConnectionInitialized` and `PlayerDataEntry`, mixins are **not needed** — except for clean data access such as player language (see below).
 
 ---
 
-## Bonus Example Component: Localization & Pluralization
+## 🗣️ Localization and Pluralization System
 
-This addon includes an example of implementing localized and properly pluralized messages for the welcome text.
+This addon includes a fully localized and pluralization-aware welcome message system, powered by Minecraft’s built-in translation components (`ChatMessageComponent`).
 
-* The message template uses placeholders:
+### How it works
+
+* Each language file defines up to three message forms:
 
   ```text
-  message.customplayerdata.welcome=Welcome back! You have joined %d %s.
+  message.customplayerdata.welcome.singular=Welcome back! You have joined %d time.
+  message.customplayerdata.welcome.few=Welcome back! You have joined %d times.
+  message.customplayerdata.welcome.plural=Welcome back! You have joined %d times.
   ```
 
-* `LocalizationHelper` selects the correct word form based on count and fetches the translation:
+* When a player joins:
+
+    1. Their join count is incremented and saved.
+    2. Their selected client language (e.g. `en_US`, `ru_RU`, `ja_JP`) is detected using a mixin accessor.
+    3. `PluralizationHelper` determines the correct plural form based on count and language.
+    4. The addon sends a localized message using `ChatMessageComponent`, allowing the client to render it correctly.
+
+Example code:
+
+```java
+String pluralSuffix = PluralizationHelper.getPluralizationKeySuffix(player, joinCount);
+String translationKey = "message.customplayerdata.welcome." + pluralSuffix;
+ChatMessageComponent msg = ChatMessageComponent.createFromTranslationWithSubstitutions(translationKey, joinCount);
+player.sendChatToPlayer(msg);
+```
+
+### Supported pluralization rules
+
+| Language type                      | Examples                                     | Key suffixes used             |
+| ---------------------------------- | -------------------------------------------- | ----------------------------- |
+| **Simple 2-form (most languages)** | English, Spanish, German, French, Portuguese | `singular` / `plural`         |
+| **3-form (Slavic languages)**      | Russian, Polish, Czech, Slovak               | `singular` / `few` / `plural` |
+| **Invariant**                      | Japanese, Chinese, Hindi, Korean, etc.       | `plural` (same text for all)  |
+
+### Technical notes
+
+* Language detection uses an accessor mixin to read the private `translator` field from `EntityPlayerMP`:
 
   ```java
-  String timesWord = LocalizationHelper.getTimesWord(joinCount);
-  String messageTemplate = LocalizationHelper.getLocalizedString("message.customplayerdata.welcome");
-  player.addChatMessage(String.format(messageTemplate, joinCount, timesWord));
+  ((EntityPlayerMPAccessor) player).getTranslator();
   ```
-
-* All `.lang` files **must be saved as UTF-8 encoding** to properly display non-ASCII characters (Russian, Chinese, Japanese, Hindi, etc.). Most text editors default to UTF-8, but verify this for files containing non-Latin characters.
-
-* In Minecraft 1.6.4, regional fallback is not supported. Selecting "Español (México)" will not fall back to using the es_ES.lang file — the game only loads the exact language file matching the selected language code (or defaults to `en_US`).
-
-* The "addon prefix" setting in fabric.mod.json (e.g., "EX", or in this addon's case: "CPDA") does **not** affect loading of `.lang` files.
-  Minecraft reads language files directly from `assets/<modid>/lang/<locale>.lang` based on the exact filename
-  (case-sensitive). Correctly naming your files (e.g., `en_US.lang`) is what ensures they load properly.
-
-* **Pluralization logic** handles different rules across languages:
-   - **English, German, French, Portuguese, Spanish**: "time" (1) vs "times" (2+)
-   - **Russian**: Three forms depending on the number (e.g., 1 раз, 2 раза, 5 раз)
-   - **Hindi, Japanese, Chinese**: No pluralization (same word for all counts)
+* All `.lang` files **must be saved as UTF-8** for non-Latin characters to display properly.
+* Minecraft 1.6.4 does **not** support regional fallbacks — filenames must exactly match the player’s selected language code (e.g., `es_ES.lang`).
 
 ---
 
-## Project structure
+## 📁 Project structure
 
 ```
 src/main/
 ├── java/btw/community/customplayerdata/
 │   ├── CustomPlayerDataAddon.java
-│   ├── LocalizationHelper.java
 │   ├── PlayerJoinTracker.java
-│   └── mixin/                     // optional mixins (none currently)
+│   ├── PluralizationHelper.java
+│   └── mixin/
+│       └── EntityPlayerMPAccessor.java
 └── resources/
     ├── assets/customplayerdata/
     │   ├── icon.png
-    │   └── lang/                  // localization strings
+    │   └── lang/
+    │       ├── en_US.lang
     │       ├── de_DE.lang
     │       ├── ...
     │       └── zh_CN.lang
@@ -142,24 +161,28 @@ src/main/
 
 ---
 
-## How it works
+## ⚙️ How it works
 
 1. **Initialization**
 
-   * `CustomPlayerDataAddon.initialize()` registers the `PlayerDataEntry`.
+    * `CustomPlayerDataAddon.initialize()` registers the `PlayerDataEntry`.
 
 2. **Player joins the world**
 
-   * `serverPlayerConnectionInitialized` is called.
-   * `PlayerJoinTracker.sendWelcomeMessage(player)` reads the stored join count, increments it, writes it back, and sends a **localized and pluralized** message.
+    * `serverPlayerConnectionInitialized` triggers `PlayerJoinTracker.sendWelcomeMessage(player)`.
+    * The join count is incremented, saved, and displayed with correct pluralization and localization.
 
 3. **Persistence**
 
-   * BTW automatically saves all registered `PlayerDataEntry` values to the player's `.dat` file.
+    * BTW automatically saves registered `PlayerDataEntry` values to each player’s `.dat` file.
 
 4. **Syncing**
 
-   * The `syncPlayer()` component ensures clients see updated values immediately.
+    * The `.syncPlayer()` flag ensures the player’s data stays synchronized between server and client.
+
+5. **Localization**
+
+    * The player’s language is detected via a mixin accessor, ensuring accurate translation key selection.
 
 ---
 
@@ -167,7 +190,7 @@ src/main/
 
 * Add more per-player stats by creating new `PlayerDataEntry`s.
 * Store world-specific or global data using `.world()` or `.global()` instead of `.player()`.
-* Combine with `syncPlayerAll()` to share data between multiple players if needed.
+* Combine with `.syncPlayerAll()` to share data between multiple players if needed.
 
 ---
 

@@ -4,6 +4,7 @@
   "package": "btw.community.customplayerdata.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "EntityPlayerMPAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

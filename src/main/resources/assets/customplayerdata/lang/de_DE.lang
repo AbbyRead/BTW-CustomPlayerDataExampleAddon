@@ -1,2 +1,3 @@
-# German
-message.customplayerdata.welcome=Willkommen zurück! Du warst schon %d %s hier.
+# German - Simple singular/plural (though "Mal" works for both)
+message.customplayerdata.welcome.singular=Willkommen zurück! Du warst schon %d Mal hier.
+message.customplayerdata.welcome.plural=Willkommen zurück! Du warst schon %d Mal hier.

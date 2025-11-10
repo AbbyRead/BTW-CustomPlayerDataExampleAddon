@@ -1,0 +1,5 @@
+# Polish - 3-form pluralization
+# Note: This file must be saved as UTF-8 encoding
+message.customplayerdata.welcome.singular=Witamy ponownie! Dołączyłeś %d raz.
+message.customplayerdata.welcome.few=Witamy ponownie! Dołączyłeś %d razy.
+message.customplayerdata.welcome.plural=Witamy ponownie! Dołączyłeś %d razy.

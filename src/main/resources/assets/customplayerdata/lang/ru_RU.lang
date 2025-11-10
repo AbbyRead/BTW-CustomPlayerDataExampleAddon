@@ -1,3 +1,14 @@
-# Russian
+# Russian - Full 3-form pluralization support!
 # Note: This file must be saved as UTF-8 encoding
-message.customplayerdata.welcome=С возвращением! Вы зашли %d %s.
+
+# Form 1: Used for numbers ending in 1 (except 11)
+# Examples: 1, 21, 31, 41, 51, 61, 71, 81, 91, 101, etc.
+message.customplayerdata.welcome.singular=С возвращением! Вы зашли %d раз.
+
+# Form 2: Used for numbers ending in 2-4 (except 12-14)
+# Examples: 2, 3, 4, 22, 23, 24, 32, 33, 34, 42, 43, 44, etc.
+message.customplayerdata.welcome.few=С возвращением! Вы зашли %d раза.
+
+# Form 3: Used for all other numbers
+# Examples: 0, 5-20, 25-30, 35-40, etc.
+message.customplayerdata.welcome.plural=С возвращением! Вы зашли %d раз.

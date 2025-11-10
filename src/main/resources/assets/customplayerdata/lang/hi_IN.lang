@@ -1,3 +1,4 @@
-# Hindi
+# Hindi - "बार" is used for counting, no plural form needed
 # Note: This file must be saved as UTF-8 encoding
-message.customplayerdata.welcome=स्वागत है! आपने %d %s खेली है।
+message.customplayerdata.welcome.singular=स्वागत है! आपने %d बार खेली है।
+message.customplayerdata.welcome.plural=स्वागत है! आपने %d बार खेली है।

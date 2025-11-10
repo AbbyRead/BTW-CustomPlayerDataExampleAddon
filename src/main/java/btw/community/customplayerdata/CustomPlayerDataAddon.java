@@ -15,7 +15,12 @@ public class CustomPlayerDataAddon extends BTWAddon {
 
 	private static CustomPlayerDataAddon instance;
 
-	// Player data entry for join count
+	/**
+	 * Player data entry for join count.
+	 * <p>
+	 * syncPlayer() syncs this data ONLY between the server and the owning player.
+	 * If you need to broadcast data to all players, use syncAll() instead.
+	 */
 	public static final DataEntry.PlayerDataEntry<Integer> JOIN_COUNT_ENTRY =
 			DataProvider.getBuilder(Integer.class)
 					.name("JoinCount")
@@ -23,7 +28,7 @@ public class CustomPlayerDataAddon extends BTWAddon {
 					.readNBT(nbt -> nbt.hasKey("JoinCount") ? nbt.getInteger("JoinCount") : 0)
 					.writeNBT((nbt, val) -> nbt.setInteger("JoinCount", val))
 					.player()           // marks as player-specific
-					.syncPlayer()       // ensures it syncs with client
+					.syncPlayer()       // syncs ONLY to the owning player (not broadcast to all)
 					.buildPlayer();     // builds the PlayerDataEntry instance
 
 	public CustomPlayerDataAddon() {

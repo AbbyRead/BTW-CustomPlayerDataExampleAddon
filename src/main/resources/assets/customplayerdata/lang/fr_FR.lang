@@ -1,2 +1,3 @@
-# French
-message.customplayerdata.welcome=Bon retour ! Vous vous êtes connecté %d %s.
+# French - "fois" works for both singular and plural
+message.customplayerdata.welcome.singular=Bon retour ! Vous vous êtes connecté %d fois.
+message.customplayerdata.welcome.plural=Bon retour ! Vous vous êtes connecté %d fois.

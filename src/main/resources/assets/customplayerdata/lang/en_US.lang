@@ -1,2 +1,3 @@
-# English (US)
-message.customplayerdata.welcome=Welcome back! You have joined %d %s.
+# English (US) - Simple singular/plural
+message.customplayerdata.welcome.singular=Welcome back! You have joined %d time.
+message.customplayerdata.welcome.plural=Welcome back! You have joined %d times.

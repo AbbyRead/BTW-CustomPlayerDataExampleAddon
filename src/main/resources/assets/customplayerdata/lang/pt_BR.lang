@@ -1,2 +1,3 @@
-# Portuguese (Brazil)
-message.customplayerdata.welcome=Bem-vindo de volta! Você entrou %d %s.
+# Portuguese (Brazil) - Simple singular/plural
+message.customplayerdata.welcome.singular=Bem-vindo de volta! Você entrou %d vez.
+message.customplayerdata.welcome.plural=Bem-vindo de volta! Você entrou %d vezes.

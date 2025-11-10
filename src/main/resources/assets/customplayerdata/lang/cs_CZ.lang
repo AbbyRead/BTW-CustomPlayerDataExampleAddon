@@ -1,0 +1,5 @@
+# Czech - 3-form pluralization
+# Note: This file must be saved as UTF-8 encoding
+message.customplayerdata.welcome.singular=Vítejte zpět! Připojili jste se %d krát.
+message.customplayerdata.welcome.few=Vítejte zpět! Připojili jste se %d krát.
+message.customplayerdata.welcome.plural=Vítejte zpět! Připojili jste se %d krát.

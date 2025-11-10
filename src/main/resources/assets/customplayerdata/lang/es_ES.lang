@@ -1,2 +1,3 @@
-# Spanish
-message.customplayerdata.welcome=¡Bienvenido de nuevo! Has entrado %d %s.
+# Spanish - Simple singular/plural
+message.customplayerdata.welcome.singular=¡Bienvenido de nuevo! Has entrado %d vez.
+message.customplayerdata.welcome.plural=¡Bienvenido de nuevo! Has entrado %d veces.

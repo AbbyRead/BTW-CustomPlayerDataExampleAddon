@@ -1,7 +1,7 @@
 package btw.community.customplayerdata;
 
+import net.minecraft.src.ChatMessageComponent;
 import net.minecraft.src.EntityPlayerMP;
-import btw.AddonHandler;
 
 /**
  * Handles player join tracking and sending a localized welcome message.
@@ -10,6 +10,9 @@ public class PlayerJoinTracker {
 
 	/**
 	 * Reads, increments, and updates the player's join count, then sends a localized welcome message.
+	 * <p>
+	 * The message is sent as a translation key using ChatMessageComponent, which allows
+	 * the client to translate it based on the player's language settings.
 	 *
 	 * @param player The player who joined.
 	 */
@@ -20,25 +23,21 @@ public class PlayerJoinTracker {
 		Integer joinCount = player.getData(CustomPlayerDataAddon.JOIN_COUNT_ENTRY);
 		if (joinCount == null) {
 			joinCount = 0;
-			player.setData(CustomPlayerDataAddon.JOIN_COUNT_ENTRY, joinCount);
 		}
 
 		// Increment and save
 		joinCount++;
 		player.setData(CustomPlayerDataAddon.JOIN_COUNT_ENTRY, joinCount);
 
-		// Get localized pluralized word
-		String timesWord = PluralizationHelper.getTimesWord(joinCount);
+		// Get the appropriate pluralization suffix based on the player's language and the count
+		String pluralSuffix = PluralizationHelper.getPluralizationKeySuffix(player, joinCount);
 
-		// Fetch localized message. Regional fallback does not occur in MC 1.6.4.
-		String messageTemplate = PluralizationHelper.getLocalizedString("message.customplayerdata.welcome");
+		// Construct the full translation key (e.g., "message.customplayerdata.welcome.singular")
+		String translationKey = "message.customplayerdata.welcome." + pluralSuffix;
 
-		// Log a warning if the translation key is missing
-		if (messageTemplate.equals("message.customplayerdata.welcome")) {
-			AddonHandler.logWarning("Translation key 'message.customplayerdata.welcome' is missing in your .lang files!");
-		}
-
-		// Send message
-		player.addChatMessage(String.format(messageTemplate, joinCount, timesWord));
+		// Send the localized message using ChatMessageComponent with substitution
+		// The client will translate this based on the player's language, replacing %d with joinCount
+		ChatMessageComponent msg = ChatMessageComponent.createFromTranslationWithSubstitutions(translationKey, joinCount);
+		player.sendChatToPlayer(msg);
 	}
 }
