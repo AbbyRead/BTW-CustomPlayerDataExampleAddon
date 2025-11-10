@@ -1,0 +1,20 @@
+# Arabic - 6-form pluralization (most complex pluralization system)
+# Note: This file must be saved as UTF-8 encoding
+
+# Zero form: exactly 0
+message.customplayerdata.welcome.zero=مرحبا بعودتك! لم تنضم بعد.
+
+# Singular form: exactly 1
+message.customplayerdata.welcome.singular=مرحبا بعودتك! انضممت %d مرة.
+
+# Dual form: exactly 2
+message.customplayerdata.welcome.dual=مرحبا بعودتك! انضممت %d مرتين.
+
+# Few form: 3-10
+message.customplayerdata.welcome.few=مرحبا بعودتك! انضممت %d مرات.
+
+# Many form: 11-99
+message.customplayerdata.welcome.many=مرحبا بعودتك! انضممت %d مرة.
+
+# Plural form: 100+
+message.customplayerdata.welcome.plural=مرحبا بعودتك! انضممت %d مرة.

@@ -1,4 +1,8 @@
 # English (US) - Simple singular/plural
+# Note: English only uses singular/plural, but we define all keys for compatibility
+message.customplayerdata.welcome.zero=Welcome back! You have joined %d times.
 message.customplayerdata.welcome.singular=Welcome back! You have joined %d time.
+message.customplayerdata.welcome.dual=Welcome back! You have joined %d times.
 message.customplayerdata.welcome.few=Welcome back! You have joined %d times.
+message.customplayerdata.welcome.many=Welcome back! You have joined %d times.
 message.customplayerdata.welcome.plural=Welcome back! You have joined %d times.

@@ -1,0 +1,17 @@
+# Irish (Gaeilge) - 5-form pluralization
+# Note: This file must be saved as UTF-8 encoding
+
+# Singular: exactly 1
+message.customplayerdata.welcome.singular=Fáilte ar ais! Tá tú tar éis dul isteach %d uair amháin.
+
+# Dual: exactly 2
+message.customplayerdata.welcome.dual=Fáilte ar ais! Tá tú tar éis dul isteach %d uair.
+
+# Few: 3-6
+message.customplayerdata.welcome.few=Fáilte ar ais! Tá tú tar éis dul isteach %d huaire.
+
+# Many: 7-10
+message.customplayerdata.welcome.many=Fáilte ar ais! Tá tú tar éis dul isteach %d n-uaire.
+
+# Plural: 0, 11+
+message.customplayerdata.welcome.plural=Fáilte ar ais! Tá tú tar éis dul isteach %d uair.
